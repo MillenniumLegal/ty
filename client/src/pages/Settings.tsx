@@ -13,6 +13,22 @@ export const Settings: React.FC = () => {
     priorityLeads: 0,
     maxConcurrent: 0
   });
+  const [showGlobalQuotaModal, setShowGlobalQuotaModal] = useState(false);
+  const [showAddOutcomeModal, setShowAddOutcomeModal] = useState(false);
+  const [globalQuotaData, setGlobalQuotaData] = useState({
+    dailyQuota: 0,
+    weeklyQuota: 0,
+    monthlyQuota: 0,
+    priorityLeads: 0,
+    maxConcurrent: 0
+  });
+  const [newOutcomeCode, setNewOutcomeCode] = useState({
+    code: '',
+    name: '',
+    nextAction: '',
+    autoSchedule: false,
+    scheduleDelay: 0
+  });
 
   // Mock data - replace with actual API calls
   const users = [
@@ -108,6 +124,38 @@ export const Settings: React.FC = () => {
     if (percentage >= 100) return { status: 'Full', color: 'text-red-600 bg-red-50' };
     if (percentage >= 80) return { status: 'Near Limit', color: 'text-yellow-600 bg-yellow-50' };
     return { status: 'Available', color: 'text-green-600 bg-green-50' };
+  };
+
+  const handleSetGlobalQuota = () => {
+    setShowGlobalQuotaModal(true);
+  };
+
+  const handleSaveGlobalQuota = () => {
+    console.log('Setting global quotas:', globalQuotaData);
+    setShowGlobalQuotaModal(false);
+    setGlobalQuotaData({
+      dailyQuota: 0,
+      weeklyQuota: 0,
+      monthlyQuota: 0,
+      priorityLeads: 0,
+      maxConcurrent: 0
+    });
+  };
+
+  const handleAddOutcomeCode = () => {
+    setShowAddOutcomeModal(true);
+  };
+
+  const handleSaveOutcomeCode = () => {
+    console.log('Adding new outcome code:', newOutcomeCode);
+    setShowAddOutcomeModal(false);
+    setNewOutcomeCode({
+      code: '',
+      name: '',
+      nextAction: '',
+      autoSchedule: false,
+      scheduleDelay: 0
+    });
   };
 
   return (
@@ -208,7 +256,10 @@ export const Settings: React.FC = () => {
               <h2 className="text-lg font-semibold text-gray-900">Lead Quotas Management</h2>
               <p className="text-sm text-gray-600">Set daily, weekly, and monthly lead quotas for agents</p>
             </div>
-            <button className="btn-primary flex items-center space-x-2">
+            <button 
+              className="btn-primary flex items-center space-x-2"
+              onClick={handleSetGlobalQuota}
+            >
               <Plus className="h-5 w-5" />
               <span>Set Global Quotas</span>
             </button>
@@ -375,7 +426,10 @@ export const Settings: React.FC = () => {
         <div className="space-y-6">
           <div className="flex justify-between items-center">
             <h2 className="text-lg font-semibold text-gray-900">Outcome Codes</h2>
-            <button className="btn-primary flex items-center space-x-2">
+            <button 
+              className="btn-primary flex items-center space-x-2"
+              onClick={handleAddOutcomeCode}
+            >
               <Plus className="h-5 w-5" />
               <span>Add Outcome Code</span>
             </button>
@@ -636,6 +690,200 @@ export const Settings: React.FC = () => {
                   onClick={handleSaveQuota}
                 >
                   Save Quotas
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Global Quota Modal */}
+      {showGlobalQuotaModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-gray-900">Set Global Quotas</h3>
+              <button 
+                className="text-gray-400 hover:text-gray-600"
+                onClick={() => setShowGlobalQuotaModal(false)}
+              >
+                <Trash2 className="h-6 w-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Daily Quota</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={globalQuotaData.dailyQuota}
+                    onChange={(e) => setGlobalQuotaData({...globalQuotaData, dailyQuota: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="50"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Maximum leads per day for all agents</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Weekly Quota</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={globalQuotaData.weeklyQuota}
+                    onChange={(e) => setGlobalQuotaData({...globalQuotaData, weeklyQuota: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="250"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Maximum leads per week for all agents</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Monthly Quota</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={globalQuotaData.monthlyQuota}
+                    onChange={(e) => setGlobalQuotaData({...globalQuotaData, monthlyQuota: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="1000"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Maximum leads per month for all agents</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Priority Leads</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={globalQuotaData.priorityLeads}
+                    onChange={(e) => setGlobalQuotaData({...globalQuotaData, priorityLeads: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="10"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">High priority leads per day for all agents</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Max Concurrent Leads</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={globalQuotaData.maxConcurrent}
+                    onChange={(e) => setGlobalQuotaData({...globalQuotaData, maxConcurrent: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="20"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Maximum active leads at once for all agents</p>
+                </div>
+              </div>
+
+              <div className="flex justify-end space-x-3 mt-6">
+                <button 
+                  className="btn-secondary"
+                  onClick={() => setShowGlobalQuotaModal(false)}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className="btn-primary"
+                  onClick={handleSaveGlobalQuota}
+                >
+                  Set Global Quotas
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Outcome Code Modal */}
+      {showAddOutcomeModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-gray-900">Add New Outcome Code</h3>
+              <button 
+                className="text-gray-400 hover:text-gray-600"
+                onClick={() => setShowAddOutcomeModal(false)}
+              >
+                <Trash2 className="h-6 w-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Code</label>
+                  <input
+                    type="text"
+                    className="input-field"
+                    value={newOutcomeCode.code}
+                    onChange={(e) => setNewOutcomeCode({...newOutcomeCode, code: e.target.value})}
+                    placeholder="e.g., INT, NOT, BUS"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Short code for the outcome</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                  <input
+                    type="text"
+                    className="input-field"
+                    value={newOutcomeCode.name}
+                    onChange={(e) => setNewOutcomeCode({...newOutcomeCode, name: e.target.value})}
+                    placeholder="e.g., Interested, Not Interested, Busy"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Full name of the outcome</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Next Action</label>
+                  <select
+                    className="input-field"
+                    value={newOutcomeCode.nextAction}
+                    onChange={(e) => setNewOutcomeCode({...newOutcomeCode, nextAction: e.target.value})}
+                  >
+                    <option value="">Select next action...</option>
+                    <option value="Call Back">Call Back</option>
+                    <option value="Send Quote">Send Quote</option>
+                    <option value="Schedule Follow-up">Schedule Follow-up</option>
+                    <option value="Close Lead">Close Lead</option>
+                    <option value="Reassign">Reassign</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Auto Schedule</label>
+                  <select
+                    className="input-field"
+                    value={newOutcomeCode.autoSchedule.toString()}
+                    onChange={(e) => setNewOutcomeCode({...newOutcomeCode, autoSchedule: e.target.value === 'true'})}
+                  >
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Schedule Delay (hours)</label>
+                  <input
+                    type="number"
+                    className="input-field"
+                    value={newOutcomeCode.scheduleDelay}
+                    onChange={(e) => setNewOutcomeCode({...newOutcomeCode, scheduleDelay: parseInt(e.target.value) || 0})}
+                    min="0"
+                    max="168"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Hours to wait before scheduling (0-168)</p>
+                </div>
+              </div>
+
+              <div className="flex justify-end space-x-3 mt-6">
+                <button 
+                  className="btn-secondary"
+                  onClick={() => setShowAddOutcomeModal(false)}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className="btn-primary"
+                  onClick={handleSaveOutcomeCode}
+                >
+                  Add Outcome Code
                 </button>
               </div>
             </div>

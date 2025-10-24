@@ -58,7 +58,7 @@ export const LeadManagement: React.FC = () => {
   const [filterSource, setFilterSource] = useState('All');
   const [filterAge, setFilterAge] = useState('All');
   const [viewMode, setViewMode] = useState<'inbox'>('inbox');
-  const [selectedStage, setSelectedStage] = useState('new');
+  const [selectedStage, setSelectedStage] = useState('all');
   const [showLeadSidebar, setShowLeadSidebar] = useState(true);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [showAssignModal, setShowAssignModal] = useState(false);
@@ -235,6 +235,390 @@ export const LeadManagement: React.FC = () => {
       ageInHours: 75,
       isOverdue: false,
       notes: 'Payment pending'
+    },
+    // New Leads - Not contacted
+    {
+      id: 'L-007',
+      name: 'Robert Anderson',
+      email: 'robert.a@email.com',
+      phone: '+44 1704 773294',
+      source: 'Hoowla',
+      quoteId: 'Q-007',
+      quoteAmount: 1350,
+      priority: 'High',
+      status: 'New',
+      stage: 'New',
+      createdAt: '2024-01-15T10:30:00Z',
+      contactAttempts: 0,
+      maxAttempts: 5,
+      ageInHours: 3.5,
+      isOverdue: false,
+      notes: 'Urgent - needs immediate contact'
+    },
+    {
+      id: 'L-008',
+      name: 'Jennifer White',
+      email: 'jennifer.w@email.com',
+      phone: '+44 1704 773295',
+      source: 'Direct',
+      quoteId: 'Q-008',
+      quoteAmount: 2200,
+      priority: 'Medium',
+      status: 'New',
+      stage: 'New',
+      createdAt: '2024-01-15T09:15:00Z',
+      contactAttempts: 0,
+      maxAttempts: 5,
+      ageInHours: 4.75,
+      isOverdue: false,
+      notes: 'Referred by existing client'
+    },
+    {
+      id: 'L-009',
+      name: 'Michael Brown',
+      email: 'michael.b@email.com',
+      phone: '+44 1704 773296',
+      source: 'Comparison Site',
+      quoteId: 'Q-009',
+      quoteAmount: 1800,
+      priority: 'High',
+      status: 'New',
+      stage: 'New',
+      createdAt: '2024-01-15T08:45:00Z',
+      contactAttempts: 0,
+      maxAttempts: 5,
+      ageInHours: 5.25,
+      isOverdue: false,
+      notes: 'High value property'
+    },
+    // Call-1 Stage
+    {
+      id: 'L-010',
+      name: 'Sarah Davis',
+      email: 'sarah.d@email.com',
+      phone: '+44 1704 773297',
+      source: 'Hoowla',
+      quoteId: 'Q-010',
+      quoteAmount: 1600,
+      priority: 'Medium',
+      status: 'Contacted',
+      stage: 'Call-1',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-14T16:20:00Z',
+      lastActionAt: '2024-01-15T09:00:00Z',
+      contactAttempts: 1,
+      maxAttempts: 5,
+      ageInHours: 20.5,
+      isOverdue: false,
+      notes: 'No answer on first call'
+    },
+    {
+      id: 'L-011',
+      name: 'David Wilson',
+      email: 'david.w@email.com',
+      phone: '+44 1704 773298',
+      source: 'Direct',
+      quoteId: 'Q-011',
+      quoteAmount: 1950,
+      priority: 'High',
+      status: 'Contacted',
+      stage: 'Call-1',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-14T14:10:00Z',
+      lastActionAt: '2024-01-15T10:30:00Z',
+      contactAttempts: 1,
+      maxAttempts: 5,
+      ageInHours: 20.33,
+      isOverdue: false,
+      notes: 'Left voicemail, waiting for callback'
+    },
+    // Call-2 Stage
+    {
+      id: 'L-012',
+      name: 'Emma Thompson',
+      email: 'emma.t@email.com',
+      phone: '+44 1704 773299',
+      source: 'Comparison Site',
+      quoteId: 'Q-012',
+      quoteAmount: 1750,
+      priority: 'Medium',
+      status: 'Contacted',
+      stage: 'Call-2',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-13T11:30:00Z',
+      lastActionAt: '2024-01-15T08:45:00Z',
+      contactAttempts: 2,
+      maxAttempts: 5,
+      ageInHours: 52.25,
+      isOverdue: true,
+      notes: 'Second attempt - still no answer'
+    },
+    {
+      id: 'L-013',
+      name: 'James Miller',
+      email: 'james.m@email.com',
+      phone: '+44 1704 773300',
+      source: 'Hoowla',
+      quoteId: 'Q-013',
+      quoteAmount: 2100,
+      priority: 'High',
+      status: 'Contacted',
+      stage: 'Call-2',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-13T09:15:00Z',
+      lastActionAt: '2024-01-15T11:00:00Z',
+      contactAttempts: 2,
+      maxAttempts: 5,
+      ageInHours: 54.75,
+      isOverdue: true,
+      notes: 'Busy signal on second call'
+    },
+    // Call-3 Stage
+    {
+      id: 'L-014',
+      name: 'Lisa Garcia',
+      email: 'lisa.g@email.com',
+      phone: '+44 1704 773301',
+      source: 'Direct',
+      quoteId: 'Q-014',
+      quoteAmount: 1450,
+      priority: 'Medium',
+      status: 'Contacted',
+      stage: 'Call-3',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-12T15:45:00Z',
+      lastActionAt: '2024-01-15T09:30:00Z',
+      contactAttempts: 3,
+      maxAttempts: 5,
+      ageInHours: 65.75,
+      isOverdue: true,
+      notes: 'Third attempt - phone went to voicemail'
+    },
+    // Call-4 Stage
+    {
+      id: 'L-015',
+      name: 'Robert Johnson',
+      email: 'robert.j@email.com',
+      phone: '+44 1704 773302',
+      source: 'Comparison Site',
+      quoteId: 'Q-015',
+      quoteAmount: 1850,
+      priority: 'High',
+      status: 'Contacted',
+      stage: 'Call-4',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-11T10:20:00Z',
+      lastActionAt: '2024-01-15T10:15:00Z',
+      contactAttempts: 4,
+      maxAttempts: 5,
+      ageInHours: 83.92,
+      isOverdue: true,
+      notes: 'Fourth attempt - line busy'
+    },
+    {
+      id: 'L-016',
+      name: 'Jennifer Martinez',
+      email: 'jennifer.m@email.com',
+      phone: '+44 1704 773303',
+      source: 'Hoowla',
+      quoteId: 'Q-016',
+      quoteAmount: 1650,
+      priority: 'Medium',
+      status: 'Contacted',
+      stage: 'Call-4',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-11T08:30:00Z',
+      lastActionAt: '2024-01-15T11:45:00Z',
+      contactAttempts: 4,
+      maxAttempts: 5,
+      ageInHours: 87.25,
+      isOverdue: true,
+      notes: 'Fourth attempt - no answer'
+    },
+    // Call-5 Stage (Final attempt)
+    {
+      id: 'L-017',
+      name: 'Michael Davis',
+      email: 'michael.d@email.com',
+      phone: '+44 1704 773304',
+      source: 'Direct',
+      quoteId: 'Q-017',
+      quoteAmount: 2000,
+      priority: 'High',
+      status: 'Contacted',
+      stage: 'Call-5',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-10T14:15:00Z',
+      lastActionAt: '2024-01-15T12:00:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 105.75,
+      isOverdue: true,
+      notes: 'Final attempt - no response, consider closing'
+    },
+    // Interested Stage
+    {
+      id: 'L-018',
+      name: 'Sarah Wilson',
+      email: 'sarah.w@email.com',
+      phone: '+44 1704 773305',
+      source: 'Hoowla',
+      quoteId: 'Q-018',
+      quoteAmount: 1900,
+      priority: 'High',
+      status: 'Interested',
+      stage: 'Interested',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-13T13:20:00Z',
+      lastActionAt: '2024-01-15T14:30:00Z',
+      contactAttempts: 2,
+      maxAttempts: 5,
+      ageInHours: 49.17,
+      isOverdue: false,
+      notes: 'Very interested, call back scheduled for tomorrow 2pm'
+    },
+    {
+      id: 'L-019',
+      name: 'David Thompson',
+      email: 'david.t@email.com',
+      phone: '+44 1704 773306',
+      source: 'Comparison Site',
+      quoteId: 'Q-019',
+      quoteAmount: 1750,
+      priority: 'Medium',
+      status: 'Interested',
+      stage: 'Interested',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-12T16:45:00Z',
+      lastActionAt: '2024-01-15T15:00:00Z',
+      contactAttempts: 3,
+      maxAttempts: 5,
+      ageInHours: 46.25,
+      isOverdue: false,
+      notes: 'Interested, wants to discuss tomorrow morning'
+    },
+    // Ready to Instruct Stage
+    {
+      id: 'L-020',
+      name: 'Emma Anderson',
+      email: 'emma.a@email.com',
+      phone: '+44 1704 773307',
+      source: 'Direct',
+      quoteId: 'Q-020',
+      quoteAmount: 2200,
+      priority: 'High',
+      status: 'Quote Sent',
+      stage: 'Ready to Instruct',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-11T11:00:00Z',
+      lastActionAt: '2024-01-15T16:15:00Z',
+      contactAttempts: 4,
+      maxAttempts: 5,
+      ageInHours: 85.25,
+      isOverdue: false,
+      notes: 'Ready to proceed, waiting for instruction documents'
+    },
+    {
+      id: 'L-021',
+      name: 'James Brown',
+      email: 'james.b@email.com',
+      phone: '+44 1704 773308',
+      source: 'Hoowla',
+      quoteId: 'Q-021',
+      quoteAmount: 1950,
+      priority: 'Medium',
+      status: 'Quote Sent',
+      stage: 'Ready to Instruct',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-10T15:30:00Z',
+      lastActionAt: '2024-01-15T17:00:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 97.5,
+      isOverdue: false,
+      notes: 'Quote accepted, ready for instruction'
+    },
+    // Awaiting Payment Stage
+    {
+      id: 'L-022',
+      name: 'Lisa Johnson',
+      email: 'lisa.j@email.com',
+      phone: '+44 1704 773309',
+      source: 'Comparison Site',
+      quoteId: 'Q-022',
+      quoteAmount: 1800,
+      priority: 'High',
+      status: 'Sold',
+      stage: 'Awaiting Payment',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-09T12:15:00Z',
+      lastActionAt: '2024-01-15T18:00:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 131.75,
+      isOverdue: false,
+      notes: 'Payment of £1800 pending, sent invoice yesterday'
+    },
+    {
+      id: 'L-023',
+      name: 'Robert Wilson',
+      email: 'robert.w@email.com',
+      phone: '+44 1704 773310',
+      source: 'Direct',
+      quoteId: 'Q-023',
+      quoteAmount: 2100,
+      priority: 'Medium',
+      status: 'Sold',
+      stage: 'Awaiting Payment',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-08T14:45:00Z',
+      lastActionAt: '2024-01-15T19:30:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 152.75,
+      isOverdue: false,
+      notes: 'Payment of £2100 due today'
+    },
+    // Awaiting Client Info Stage
+    {
+      id: 'L-024',
+      name: 'Jennifer Davis',
+      email: 'jennifer.d@email.com',
+      phone: '+44 1704 773311',
+      source: 'Hoowla',
+      quoteId: 'Q-024',
+      quoteAmount: 1650,
+      priority: 'Medium',
+      status: 'Quote Sent',
+      stage: 'Awaiting Client Info',
+      assignedTo: 'Agent 1',
+      createdAt: '2024-01-07T10:20:00Z',
+      lastActionAt: '2024-01-15T20:00:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 177.67,
+      isOverdue: false,
+      notes: 'Waiting for property details and ID documents'
+    },
+    {
+      id: 'L-025',
+      name: 'Michael Thompson',
+      email: 'michael.t@email.com',
+      phone: '+44 1704 773312',
+      source: 'Comparison Site',
+      quoteId: 'Q-025',
+      quoteAmount: 1950,
+      priority: 'High',
+      status: 'Quote Sent',
+      stage: 'Awaiting Client Info',
+      assignedTo: 'Agent 2',
+      createdAt: '2024-01-06T16:30:00Z',
+      lastActionAt: '2024-01-15T21:15:00Z',
+      contactAttempts: 5,
+      maxAttempts: 5,
+      ageInHours: 201.75,
+      isOverdue: false,
+      notes: 'Need mortgage details and solicitor information'
     }
   ];
 
@@ -255,7 +639,12 @@ export const LeadManagement: React.FC = () => {
       (filterAge === 'New' && lead.ageInHours < 24) ||
       (filterAge === 'Old' && lead.ageInHours >= 24) ||
       (filterAge === 'Overdue' && lead.isOverdue);
-    const matchesStage = selectedStage === 'all' || lead.stage === selectedStage;
+    const matchesStage = selectedStage === 'all' || 
+      (selectedStage === 'unassigned' ? !lead.assignedTo : 
+       selectedStage === 'overdue' ? lead.isOverdue && (user?.role === 'Agent' ? lead.assignedTo === 'Agent 1' : true) :
+       selectedStage === 'highPriority' ? lead.priority === 'High' && (user?.role === 'Agent' ? lead.assignedTo === 'Agent 1' : true) :
+       selectedStage === 'completedToday' ? lead.status === 'Sold' && (user?.role === 'Agent' ? lead.assignedTo === 'Agent 1' : true) :
+       lead.stage === selectedStage);
     
     return matchesSearch && matchesStatus && matchesSource && matchesAge && matchesStage;
   });
@@ -409,7 +798,6 @@ export const LeadManagement: React.FC = () => {
 
   const handleStageSelect = (stage: string) => {
     setSelectedStage(stage);
-    console.log('Selected stage:', stage);
   };
 
   const handleViewLead = (lead: Lead) => {
@@ -623,8 +1011,58 @@ export const LeadManagement: React.FC = () => {
       )}
 
       {/* Leads Display - Card Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredLeads.map((lead) => (
+      {filteredLeads.length === 0 ? (
+        <div className="card text-center py-12">
+          <div className="text-gray-400 mb-4">
+            <Users className="h-12 w-12 mx-auto" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No leads found</h3>
+          <p className="text-gray-600 mb-4">
+            {selectedStage === 'all' 
+              ? 'No leads match the current filters' 
+              : `No leads found in the "${selectedStage}" stage`}
+          </p>
+          <div className="text-sm text-gray-500">
+            <p>Total leads in system: {leads.length}</p>
+            <p>Selected stage: {selectedStage}</p>
+            <p>Search term: "{searchTerm}"</p>
+            <p>Status filter: {filterStatus}</p>
+            <p>Source filter: {filterSource}</p>
+            <p>Age filter: {filterAge}</p>
+            {selectedStage === 'unassigned' && (
+              <div className="mt-2 p-2 bg-yellow-50 rounded">
+                <p className="font-medium">Unassigned leads debug:</p>
+                <p>Leads without assignedTo: {leads.filter(l => !l.assignedTo).length}</p>
+                <p>Unassigned lead names: {leads.filter(l => !l.assignedTo).map(l => l.name).join(', ')}</p>
+              </div>
+            )}
+            {selectedStage === 'overdue' && (
+              <div className="mt-2 p-2 bg-red-50 rounded">
+                <p className="font-medium">Overdue leads debug:</p>
+                <p>Overdue leads count: {leads.filter(l => l.isOverdue).length}</p>
+                <p>Overdue lead names: {leads.filter(l => l.isOverdue).map(l => l.name).join(', ')}</p>
+              </div>
+            )}
+            {selectedStage === 'highPriority' && (
+              <div className="mt-2 p-2 bg-orange-50 rounded">
+                <p className="font-medium">High Priority leads debug:</p>
+                <p>High priority leads count: {leads.filter(l => l.priority === 'High').length}</p>
+                <p>High priority lead names: {leads.filter(l => l.priority === 'High').map(l => l.name).join(', ')}</p>
+              </div>
+            )}
+            {selectedStage === 'completedToday' && (
+              <div className="mt-2 p-2 bg-green-50 rounded">
+                <p className="font-medium">Completed Today debug:</p>
+                <p>Sold leads count: {leads.filter(l => l.status === 'Sold').length}</p>
+                <p>Sold lead names: {leads.filter(l => l.status === 'Sold').map(l => l.name).join(', ')}</p>
+                <p>Today's date: {new Date().toDateString()}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredLeads.map((lead) => (
           <div key={lead.id} className="card hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">
@@ -728,7 +1166,8 @@ export const LeadManagement: React.FC = () => {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+      )}
 
       {/* Assignment Modal */}
       {showAssignModal && selectedLead && (
@@ -1570,4 +2009,84 @@ Just following up on the £1,200 quote we sent..."
                   />
                 </div>
                 <div>
-        
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                  <input
+                    type="email"
+                    className="input-field"
+                    value={newLead.email}
+                    onChange={(e) => setNewLead({...newLead, email: e.target.value})}
+                    placeholder="Enter email address"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                  <input
+                    type="tel"
+                    className="input-field"
+                    value={newLead.phone}
+                    onChange={(e) => setNewLead({...newLead, phone: e.target.value})}
+                    placeholder="Enter phone number"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Source</label>
+                  <select 
+                    className="input-field"
+                    value={newLead.source}
+                    onChange={(e) => setNewLead({...newLead, source: e.target.value as any})}
+                  >
+                    <option value="Direct">Direct</option>
+                    <option value="Hoowla">Hoowla</option>
+                    <option value="Comparison Site">Comparison Site</option>
+                    <option value="Referral">Referral</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                  <select 
+                    className="input-field"
+                    value={newLead.priority}
+                    onChange={(e) => setNewLead({...newLead, priority: e.target.value as any})}
+                  >
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                <textarea
+                  className="input-field"
+                  rows={3}
+                  value={newLead.notes}
+                  onChange={(e) => setNewLead({...newLead, notes: e.target.value})}
+                  placeholder="Enter any additional notes about this lead"
+                />
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-3 mt-6">
+              <button 
+                className="btn-secondary"
+                onClick={() => setShowAddLeadModal(false)}
+              >
+                Cancel
+              </button>
+              <button 
+                className="btn-primary"
+                onClick={handleSaveNewLead}
+                disabled={!newLead.name || !newLead.email || !newLead.phone}
+              >
+                Add Lead
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+        </div>
+      </div>
+    </div>
+  );
+};

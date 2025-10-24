@@ -130,4 +130,19 @@ export interface LeadFilters {
   outcomeCode?: string;
 }
 
-// Assignme
+// Assignment Types
+export interface AssignmentRule {
+  id: string;
+  name: string;
+  conditions: {
+    source?: string;
+    status?: string;
+    dateRange?: {
+      start: string;
+      end: string;
+    };
+  };
+  assignTo: string;
+  isActive: boolean;
+}
+

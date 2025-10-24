@@ -8,31 +8,31 @@ export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   // Mock data - replace with actual API calls
   const stats = {
-    totalLeads: 1247,
-    newLeads: 23,
-    activeLeads: 156,
-    closedLeads: 89,
-    conversionRate: 12.5,
-    totalSales: 45600,
-    assignedLeads: 134,
-    unassignedLeads: 22,
+    totalLeads: 25,
+    newLeads: 3,
+    activeLeads: 22,
+    closedLeads: 0,
+    conversionRate: 8.0,
+    totalSales: 41250,
+    assignedLeads: 22,
+    unassignedLeads: 3,
   };
 
   // Role-based recent activity
   const getRecentActivity = () => {
     if (user?.role === 'Agent') {
       return [
-        { id: 1, action: 'Lead contacted', lead: 'John Smith', time: '2 minutes ago', type: 'assignment' },
-        { id: 2, action: 'Quote sent', lead: 'Sarah Johnson', time: '15 minutes ago', type: 'quote' },
-        { id: 3, action: 'Follow-up completed', lead: 'Mike Wilson', time: '1 hour ago', type: 'payment' },
-        { id: 4, action: 'New lead assigned to you', lead: 'Emma Davis', time: '2 hours ago', type: 'followup' },
+        { id: 1, action: 'Lead contacted', lead: 'Robert Anderson', time: '5 minutes ago', type: 'assignment' },
+        { id: 2, action: 'Quote sent', lead: 'Sarah Wilson', time: '20 minutes ago', type: 'quote' },
+        { id: 3, action: 'Follow-up completed', lead: 'Emma Anderson', time: '1 hour ago', type: 'payment' },
+        { id: 4, action: 'New lead assigned to you', lead: 'Michael Brown', time: '2 hours ago', type: 'followup' },
       ];
     } else {
       return [
-        { id: 1, action: 'New conveyancing lead assigned', lead: 'John Smith', time: '2 minutes ago', type: 'assignment' },
-        { id: 2, action: 'Conveyancing quote sent', lead: 'Sarah Johnson', time: '15 minutes ago', type: 'quote' },
-        { id: 3, action: 'Payment received', lead: 'Mike Wilson', time: '1 hour ago', type: 'payment' },
-        { id: 4, action: 'Follow-up scheduled', lead: 'Emma Davis', time: '2 hours ago', type: 'followup' },
+        { id: 1, action: 'New conveyancing lead assigned', lead: 'Robert Anderson', time: '5 minutes ago', type: 'assignment' },
+        { id: 2, action: 'Conveyancing quote sent', lead: 'Sarah Wilson', time: '20 minutes ago', type: 'quote' },
+        { id: 3, action: 'Payment received', lead: 'Lisa Johnson', time: '1 hour ago', type: 'payment' },
+        { id: 4, action: 'Follow-up scheduled', lead: 'Emma Anderson', time: '2 hours ago', type: 'followup' },
       ];
     }
   };
@@ -46,34 +46,34 @@ export const Dashboard: React.FC = () => {
       return [
         {
           title: 'My Assigned Leads',
-          value: '12',
+          value: '19',
           icon: User,
           color: 'bg-blue-500',
-          change: '+2',
-          changeType: 'positive' as const,
-        },
-        {
-          title: 'Leads Contacted Today',
-          value: '8',
-          icon: UserCheck,
-          color: 'bg-green-500',
           change: '+3',
           changeType: 'positive' as const,
         },
         {
+          title: 'Leads Contacted Today',
+          value: '6',
+          icon: UserCheck,
+          color: 'bg-green-500',
+          change: '+2',
+          changeType: 'positive' as const,
+        },
+        {
           title: 'Follow-ups Due',
-          value: '5',
+          value: '4',
           icon: Clock,
           color: 'bg-yellow-500',
-          change: '-1',
-          changeType: 'negative' as const,
+          change: '+1',
+          changeType: 'positive' as const,
         },
         {
           title: 'Quotes Sent',
-          value: '3',
+          value: '4',
           icon: CheckCircle,
           color: 'bg-purple-500',
-          change: '+1',
+          change: '+2',
           changeType: 'positive' as const,
         }
       ];
