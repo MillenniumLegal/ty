@@ -1,0 +1,20 @@
+{
+  "name": "crm-lead-automation",
+  "version": "1.0.0",
+  "description": "Custom CRM and Lead Automation System",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "keywords": ["crm", "leads", "automation", "react", "nodejs"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
+
