@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist",
+  "installCommand": "cd client && npm install",
+  "framework": "vite",
   "builds": [
     {
       "src": "client/package.json",
@@ -14,10 +18,5 @@
       "src": "/(.*)",
       "dest": "/client/dist/$1"
     }
-  ],
-  "functions": {
-    "client/dist/**": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
