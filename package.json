@@ -1,7 +1,7 @@
 {
-  "name": "crm-lead-automation",
+  "name": "millennium-legal-crm",
   "version": "1.0.0",
-  "description": "Custom CRM and Lead Automation System",
+  "description": "Millennium Legal CRM and Lead Automation System",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -10,11 +10,14 @@
     "build": "cd client && npm run build",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install"
   },
-  "keywords": ["crm", "leads", "automation", "react", "nodejs"],
-  "author": "",
+  "keywords": ["crm", "leads", "automation", "react", "nodejs", "millennium-legal"],
+  "author": "Millennium Legal",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
 
