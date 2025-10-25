@@ -48,23 +48,47 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (credentials: LoginCredentials): Promise<boolean> => {
     setIsLoading(true);
     try {
-      // Mock login - replace with actual API call
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      // Mock authentication - works without backend
+      const mockUsers = [
+        {
+          id: '1',
+          name: 'Admin User',
+          email: 'admin@millenniumlegal.co.uk',
+          role: 'Admin' as const,
+          token: 'mock-token-admin',
+          avatar: null,
+          lastLogin: new Date().toISOString(),
         },
-        body: JSON.stringify(credentials),
-      });
+        {
+          id: '2',
+          name: 'Manager User',
+          email: 'manager@millenniumlegal.co.uk',
+          role: 'Manager' as const,
+          token: 'mock-token-manager',
+          avatar: null,
+          lastLogin: new Date().toISOString(),
+        },
+        {
+          id: '3',
+          name: 'Agent User',
+          email: 'agent@millenniumlegal.co.uk',
+          role: 'Agent' as const,
+          token: 'mock-token-agent',
+          avatar: null,
+          lastLogin: new Date().toISOString(),
+        }
+      ];
 
-      if (response.ok) {
-        const responseData = await response.json();
-        const userData: AuthUser = responseData.data;
-        setUser(userData);
-        localStorage.setItem('authToken', userData.token);
-        localStorage.setItem('userData', JSON.stringify(userData));
+      // Find user by email
+      const user = mockUsers.find(u => u.email === credentials.email);
+      
+      if (user && credentials.password === 'password123') {
+        setUser(user);
+        localStorage.setItem('authToken', user.token);
+        localStorage.setItem('userData', JSON.stringify(user));
         return true;
       }
+      
       return false;
     } catch (error) {
       console.error('Login error:', error);
