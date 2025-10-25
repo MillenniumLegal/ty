@@ -48,7 +48,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (credentials: LoginCredentials): Promise<boolean> => {
     setIsLoading(true);
     try {
-      // Mock authentication - works without backend
+      // Mock authentication - works in both local and production
       const mockUsers = [
         {
           id: '1',
